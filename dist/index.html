@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="./App.js"></script>
     <title>my projects</title>
-</head>
+<script defer src="runtime.toDoList.js"></script><script defer src="app.toDoList.js"></script></head>
 <body>
     <div class="side-bar">
         <div class="projects">
@@ -15,15 +15,14 @@
             <button id="add-project">Add project</button>
 
             <!--The form for creating projects-->
-            <div class="project-form show">
+            <form action="" class="project-form show">
                 <div class="input-container">
-                    <label for="project-name">Name of the project:</label><input type="text" id="project-name">
+                    <label for="project-name">Name of the project:</label><input type="text" id="project-name" required>
                 </div>
                 <div class="input-container">
                     <label for="project-description">Description:</label><textarea id="project-description" cols="20" rows="3"></textarea>
                 </div>
-                <button id="create-project">Create</button>
-            </div>
+            </form>
         </div>
     </div>
     <div class="list-area">

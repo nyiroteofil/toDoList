@@ -4,8 +4,10 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin')
 
 module.exports = {
-    devtool: 'inline-source-map',
-    entry: './src/App.js',
+    mode: 'production',
+    entry: {
+        "app": './src/App.js',
+     },
     output: {
         filename: '[name].toDoList.js',
         path: path.resolve(__dirname, 'dist'),
@@ -16,27 +18,27 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        new CssMinimizerPlugin({
-            filename: '[name].css',
-            chunkFilename: '[id].css'
-        }),
+        new MiniCssExtractPlugin({
+            filename: "style.css",
+            chunkFilename: "[id].css",
+          }),
     ],
     optimization: {
         minimizer: [
         `...`,
           new CssMinimizerPlugin(),        
         ],
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader']
+            },
+            {
+                test: /\.(jpe?g|gif|img|svg)/i,
+                type: 'asset/resource'
+            }
+        ]
     }
-}
-module: {
-    rules: [
-        {
-            test: /\.css$/i,
-            use: [MiniCssExtractPlugin.loader, 'css-loader']
-        },
-        {
-            test: /\.(jpe?g|gif|img||svg)/i,
-            type: 'asset/resource'
-        }
-    ]
-}
+};

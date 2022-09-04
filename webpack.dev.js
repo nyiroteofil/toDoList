@@ -2,12 +2,15 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
+    mode: 'development',
     devtool: 'inline-source-map',
-    entry: './src/App.js',
+    entry: {
+       "app": './src/App.js',
+    },
     output: {
         filename: '[name].toDoList.js',
         path: path.resolve(__dirname, 'dist'),
-        assetModuleFile: '[name].asset[ext]',
+        assetModuleFilename: '[name].asset[ext]',
         clean: true,
     },
     plugins: [
@@ -20,17 +23,17 @@ module.exports = {
     },
     optimization: {
         runtimeChunk: 'single'
+    },
+    module: {
+        rules: [
+            {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader']
+            },
+            {
+                test: /\.(jpe?g|gif|img|svg)/i,
+                type: 'asset/resource'
+            }
+        ]
     }
 }
-module: {
-    rules: [
-        {
-            test: /\.css$/i,
-            use: ['style-loader', 'css-loader']
-        },
-        {
-            test: /\.(jpe?g|gif|img||svg)/i,
-            type: 'asset/resource'
-        }
-    ]
-};
