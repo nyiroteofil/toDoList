@@ -1,3 +1,7 @@
+import {
+    projects
+} from '../App.js'
+
 const changePopUp = (element) => {
     let container = document.querySelector(`.${element}`);
     
@@ -11,7 +15,7 @@ const changePopUp = (element) => {
 const createElement = (parent, type, className) => {
     let container = document.querySelector(`.${parent}`)
 
-    let element = document.creteElement(type);
+    let element = document.createElement(type);
     
     if (className !== undefined || className !== '') {
         element.classList.add(className);
@@ -20,18 +24,32 @@ const createElement = (parent, type, className) => {
     container.appendChild(element);
 };
 
-/**render the projects from the project array in App.js */
-
 /**This is where I will continue */
 
+const removeAllChild = (parent) => {
+    let container = document.querySelector(`.${parent}`)
+    let node = container.firstChild;
+
+    while (node) {
+        container.removeChild(container.firstChild);
+        node = container.firstChild;
+    }
+}
+
 const renderProjects = () => {
-    projects.forEach(e => {
-        
-    });
+    removeAllChild('project-items')
+
+    for (let i = 0; i < projects.length; i++) {
+        /**make the elements manualy by document.createElement */
+
+        document.querySelectorAll('.project-name')[i].textContent = projArr[i].name;
+    }
 };
 
 export {
     changePopUp,
     createElement,
+    renderProjects,
+    removeAllChild,
 };
 
