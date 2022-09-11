@@ -44,13 +44,13 @@ const removeAllChild = (parent) => {
     }
 }
 
-const renderProjects = (arr) => {
+const renderProjects = (projects) => {
     removeAllChild('project-items')
 
-    for (let i = 0; i < arr.length; i++) {
+    for (let i = 0; i < projects.length; i++) {
         produceProject(i, projects[i]);
 
-        document.querySelectorAll('.project-title')[i].textContent = arr[i].name;
+        document.querySelectorAll('.project-title')[i].textContent = projects[i].name;
     }
 };
 

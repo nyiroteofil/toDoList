@@ -7,7 +7,6 @@ module.exports = {
     mode: 'production',
     entry: {
         "app": './src/App.js',
-        "UIControlls": '/home/teofil/projects/toDoList/src/modules/UIcontrolls.js',
      },
     output: {
         filename: '[name].toDoList.js',
