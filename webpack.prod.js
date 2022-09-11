@@ -18,22 +18,12 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/index.html'
         }),
-        new MiniCssExtractPlugin({
-            filename: "style.css",
-            chunkFilename: "[id].css",
-          }),
     ],
-    optimization: {
-        minimizer: [
-        `...`,
-          new CssMinimizerPlugin(),        
-        ],
-    },
     module: {
         rules: [
             {
                 test: /\.css$/i,
-                use: [MiniCssExtractPlugin.loader, 'css-loader']
+                use: ['style-loader', 'css-loader']
             },
             {
                 test: /\.(jpe?g|gif|img|svg)/i,
