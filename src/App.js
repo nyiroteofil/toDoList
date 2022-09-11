@@ -14,6 +14,13 @@ import {
 
 let projects = [];
 
+let json = JSON.parse(projects);
+if (json) {
+        projects = JSON.parse(localStorage.getItem("projects"));
+        console.log(projects);
+        renderProjects(projects);
+}
+
 document.getElementById('close-popup').addEventListener('click', () => {changePopUp('project-form')});
 document.querySelector('#close-popup-task').addEventListener('click', () => {changePopUp('task-form')});
 document.querySelector('#add-project').addEventListener('click', () => {changePopUp('project-form')});
@@ -28,13 +35,6 @@ document.querySelector('#create-project').addEventListener('click', () => {
 
         localStorage.setItem("projects", JSON.stringify(projects));
     }
-});
-
-
-window.addEventListener('DOMContentLoaded', () => {
-    projects = JSON.parse(localStorage.getItem("projects"));
-    console.log(projects);
-    renderProjects(projects);
 });
 
 export {
