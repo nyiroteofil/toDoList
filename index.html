@@ -10,19 +10,23 @@
 <body>
     <div class="side-bar">
         <div class="projects">
-            <h1 id="proj-title">Projects</h1>
+            <h1 class="sidebar-title">Projects</h1>
             <div class="project-items"></div>
             <button id="add-project">Add project</button>
 
             <!--The form for creating projects-->
-            <form action="" class="project-form show">
+            <div class="project-form show">
                 <div class="input-container">
-                    <label for="project-name">Name of the project:</label><input type="text" id="project-name" required>
+                    <label for="project-name-input">Name of the project:</label><input type="text" id="project-name-input">
                 </div>
                 <div class="input-container">
-                    <label for="project-description">Description:</label><textarea id="project-description" cols="20" rows="3"></textarea>
+                    <label for="project-description-input">Description:</label><textarea id="project-description-input" cols="20" rows="3"></textarea>
                 </div>
-            </form>
+                <div class="button-container">
+                    <button id="create-project">Add</button>
+                    <button id="close-popup">Close</button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="list-area">
