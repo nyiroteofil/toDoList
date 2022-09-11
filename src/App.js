@@ -14,7 +14,7 @@ import {
 
 let projects = [];
 
-let json = JSON.parse(projects);
+let json = localStorage.getItem("projects");
 if (json) {
         projects = JSON.parse(localStorage.getItem("projects"));
         console.log(projects);
