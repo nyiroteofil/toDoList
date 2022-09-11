@@ -1,10 +1,11 @@
 import './style.css';
 import _ from 'lodash';
+import 'date-fns';
 
 import {
     changePopUp,
     renderProjects,
-    removeAllChild,
+    clearProjectForm,
 } from './modules/UIcontrolls.js'
 
 import {
@@ -13,16 +14,28 @@ import {
 
 const projects = [];
 
-document.getElementById('close-popup').addEventListener('click', () => {changePopUp('project-form')})
-document.querySelector('#add-project').addEventListener('click', () => {changePopUp('project-form')})
+document.getElementById('close-popup').addEventListener('click', () => {changePopUp('project-form')});
+document.querySelector('#close-popup-task').addEventListener('click', () => {changePopUp('task-form')});
+document.querySelector('#add-project').addEventListener('click', () => {changePopUp('project-form')});
 document.querySelector('#create-project').addEventListener('click', () => {
     let projName = document.querySelector('#project-name-input');
 
     if (projName.value !== '') {
-        removeAllChild('project-items')
         createProjectObj(projName.value, document.querySelector('#project-description-input').value, 'projects');
-        renderProjects(projects);
+        renderProjects();
+        clearProjectForm();
+        changePopUp('project-form');
     }
-})
+});
 
-export {projects};
+function displayProjects() {
+    projects.forEach(e => {
+        console.log(e);
+        console.log(e.tasks);
+    })
+}
+
+
+export {
+    projects,
+};
