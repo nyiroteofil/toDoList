@@ -1,6 +1,7 @@
 import {
     removeProject,
     removeTask,
+    addTask,
 } from './projects.js'
 
 import {
@@ -43,13 +44,13 @@ const removeAllChild = (parent) => {
     }
 }
 
-const renderProjects = () => {
+const renderProjects = (arr) => {
     removeAllChild('project-items')
 
-    for (let i = 0; i < projects.length; i++) {
+    for (let i = 0; i < arr.length; i++) {
         produceProject(i, projects[i]);
 
-        document.querySelectorAll('.project-title')[i].textContent = projects[i].name;
+        document.querySelectorAll('.project-title')[i].textContent = arr[i].name;
     }
 };
 
@@ -71,6 +72,8 @@ const produceProject = (index, obj) => {
         removeAllChild('tasks');
         removeProject(projectArea, obj);
         document.querySelector('.list-title').textContent = '';
+        /**Saves the array that stores the projects */
+        localStorage.setItem("projects", JSON.stringify(projects));
     });
 
     let removeIcon = document.createElement('img');
@@ -102,7 +105,10 @@ const createNewTask = (obj) => {
         }
     })
 
-    obj.addTask(name, date, priority);
+    addTask(name, date, priority, obj);
+
+    /**Saves the array that stores the projects */
+    localStorage.setItem("projects", JSON.stringify(projects));
 }
 
 const renderProjectTasks = (project) => {
@@ -129,7 +135,8 @@ const renderProjectTasks = (project) => {
         mark.src = checkMark;
 
         mark.addEventListener('click', () => {
-            removeTask(project, project.tasks[i], taskContainer)
+            removeTask(project, project.tasks[i], taskContainer);
+            localStorage.setItem("projects", JSON.stringify(projects));
         })
 
         let taskName = document.createElement('p')

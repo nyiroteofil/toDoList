@@ -11,7 +11,7 @@ module.exports = {
     output: {
         filename: '[name].toDoList.js',
         path: path.resolve(__dirname, 'dist'),
-        assetModuleFilename: '[name].asset[ext]',
+        assetModuleFilename: 'assets/[name].asset[ext]',
         clean: true,
     },
     plugins: [

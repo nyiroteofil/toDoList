@@ -4,12 +4,13 @@ function Project(name, description) {
     this.name = name;
     this.description = description;
     this.tasks = [];
-    this.addTask = (name, date, priority) => {
-        let newTask = new Task(name, date, priority)
-    
-        this.tasks.push(newTask);
-    };
 }
+
+const addTask = (name, date, priority, project) => {
+    let newTask = new Task(name, date, priority)
+
+    project.tasks.push(newTask);
+};
 
 function Task(name, date, priority) {
     this.name = name;
@@ -37,10 +38,11 @@ const removeTask = (proj, task, node) => {
     proj.tasks.splice(task, 1);
 
     document.querySelector('.tasks').removeChild(node);
-}
+};
 
 export {
     createProjectObj,
     removeProject,
+    addTask,
     removeTask,
 }
