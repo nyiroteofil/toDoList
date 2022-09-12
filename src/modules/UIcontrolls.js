@@ -10,7 +10,8 @@ import {
 
 import removeIconSvg from '../images/remove.svg'
 import checkMark from '../images/checkmark.svg'
-import { format } from 'date-fns';
+import { format, toDate } from 'date-fns';
+import { parseISO } from 'date-fns/esm';
 
 const changePopUp = (element) => {
     let container = document.querySelector(`.${element}`);
@@ -91,7 +92,6 @@ const produceProject = (index, obj) => {
 
 const clearProjectForm = () => {
     document.getElementById('project-name-input').value = '';
-    document.getElementById('project-description-input').value = '';
 }
 
 const createNewTask = (obj) => {
@@ -149,7 +149,7 @@ const renderProjectTasks = (project) => {
         if (project.tasks[i].date === '') {
             dueTime.textContent = 'No time constraint'
         } else {
-            dueTime.textContent = format(new Date(project.tasks[i].date), 'd/mm/yyyy');
+            dueTime.textContent = format(parseISO(project.tasks[i].date), 'dd/MM/yyyy');
         }
 
         switch (project.tasks[i].priority) {

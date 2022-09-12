@@ -13,12 +13,14 @@ body {
 
     width: 100vw;
     height: 100vh;
+
+    background-color: rgb(139, 70, 70);
 }
 
 /*Task list area styles*/
 
 .list-area {
-    background-color: grey;
+    background-color:rgb(139, 70, 70);
     width: 100%;
     height: 100%;
 
@@ -28,13 +30,15 @@ body {
 .list-title {
     text-align: center;
     font-size: 3em;
+
+    color:rgb(0, 0, 0)
 }
 
 .tasks {
     width: 90%;
     height: 80%;
 
-    background-color: beige;
+    background-color: rgb(212, 145, 58);
 
     margin: 50px auto 0 auto;
     padding: 15px;
@@ -43,6 +47,17 @@ body {
     flex-wrap: wrap;
     gap: 15px;
 
+    border-radius: 15px;
+    
+    overflow: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: 0;
+
+    box-shadow: 10px 10px 13px;
+}
+
+.tasks::-webkit-scrollbar {
+    display: none;
 }
 
 #add-task {
@@ -63,7 +78,8 @@ body {
 /*Side bar styles*/
 
 .side-bar {
-    background-color: rgb(22, 21, 21);
+    background-color: rgb(139, 70, 70);
+    
     height: 100%;
     width: 100%;
 }
@@ -91,7 +107,9 @@ body {
     height: 100%;
     padding: 5px;
 
-    background-color: rgb(156, 144, 144);
+    background-color: rgb(212, 145, 58);
+
+    border-radius: 15px;
 
     display: flex;
     flex-direction: column;
@@ -99,6 +117,7 @@ body {
     gap: 10px;
     align-items: flex-start;
 
+    box-shadow: 10px 10px 13px;
 }
 
 #add-project {
@@ -125,13 +144,13 @@ body {
     align-items: center;
 
     width: 300px;
-    height: 400px;
+    height: 200px;
     padding: 20px;
 
     background-color: aquamarine;
 
     position: absolute;
-    bottom: 400px;
+    bottom: calc(50% - 100px);
 }
 
 textarea {
@@ -198,17 +217,21 @@ input[type="text"], input[type="date"] {
     align-items: center;
     justify-content: space-between;
 
-    border: black 2px solid;
     border-radius: 5px;
+    box-shadow: 5px 7px 15px;
 
-    background-color: rgb(231, 231, 95);
+    background-color: rgb(0, 207, 35);
 
     overflow: hidden;
+
+    transition: scale 175ms linear;
 }
 
 .project-title {
     height: 25px;
     width: 150px;
+
+    font-family: 'merriweather';
 
     white-space:nowrap;
     overflow:hidden;
@@ -217,10 +240,12 @@ input[type="text"], input[type="date"] {
 
 .remove-project {
     height: 30px;
-    width: 30px;
+    width: 70px;
     border: none;
 
-    background-color: rgb(231, 231, 95);
+    background-color: rgb(0, 207, 35);
+
+    transition: transform 150ms linear;
 }
 
 /*Task creating form*/
@@ -236,8 +261,8 @@ input[type="text"], input[type="date"] {
     gap: 15px;
 
     position: relative;
-    left: 100px;
-    bottom: 500px;
+    left: calc(50% - 100px);
+    bottom: 350px;
 
     width: 200px;
     height: 270px;
@@ -311,3 +336,56 @@ input[type="radio"]:checked + label {
     font-size: 20px;
     font-family: 'Merriweather';
 }
+
+@media only screen and (max-width: 600px) {
+    body {
+      display: flex;
+      flex-direction: column;
+
+      overflow: scroll;
+      -ms-overflow-style: none;
+        scrollbar-width: 0;
+    }
+
+    body::-webkit-scrollbar {
+        display: none;
+    }
+
+    .project {
+        min-height: 50px;
+    }
+
+    .project-items {
+        overflow: scroll;
+
+        flex-direction: column;
+
+        -ms-overflow-style: none;
+        scrollbar-width: 0;
+
+        height: 400px;
+    }
+
+    .tasks {
+        height: min(400px);
+        width: 95%;
+    }
+
+    .project-items::-webkit-scrollbar {
+        display: none;
+    }
+
+    .list-title {
+        color: white;
+    }
+
+    .task-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        height: 70px;
+    }
+  }

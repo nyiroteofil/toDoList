@@ -1,4 +1,5 @@
 import './style.css';
+import './effects.css';
 import _ from 'lodash';
 import 'date-fns';
 
@@ -14,6 +15,7 @@ import {
 
 let projects = [];
 
+/**fetching the saved projects if there are any */
 let json = localStorage.getItem("projects");
 if (json) {
         projects = JSON.parse(localStorage.getItem("projects"));
@@ -28,7 +30,7 @@ document.querySelector('#create-project').addEventListener('click', () => {
     let projName = document.querySelector('#project-name-input');
 
     if (projName.value !== '') {
-        createProjectObj(projName.value, document.querySelector('#project-description-input').value, 'projects', projects);
+        createProjectObj(projName.value);
         renderProjects(projects);
         clearProjectForm();
         changePopUp('project-form');

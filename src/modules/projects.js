@@ -1,8 +1,7 @@
 import {projects} from '../App.js';
 
-function Project(name, description) {
+function Project(name) {
     this.name = name;
-    this.description = description;
     this.tasks = [];
 }
 
@@ -18,8 +17,8 @@ function Task(name, date, priority) {
     this.priority = priority;
 }
 
-const createProjectObj = (name, description) => {
-    let project = new Project(name, description);
+const createProjectObj = name => {
+    let project = new Project(name);
 
     projects.push(project);
 };

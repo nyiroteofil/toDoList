@@ -19,9 +19,6 @@
                 <div class="input-container">
                     <label for="project-name-input">Name of the project:</label><input type="text" id="project-name-input">
                 </div>
-                <div class="input-container">
-                    <label for="project-description-input">Description:</label><textarea id="project-description-input" cols="20" rows="3"></textarea>
-                </div>
                 <div class="button-container">
                     <button id="create-project">Add</button>
                     <button id="close-popup">Close</button>
@@ -33,18 +30,18 @@
         <h1 class="list-title">this project</h1>
         <div class="tasks">
         </div>
-        <div class="task-form">
-            <label for="task-name" class="task-name-label">Tasks name</label><input type="text" id="task-name">
-            <label for="task-date" class="task-date-label">task's due date</label><input type="date" id="task-date">
-            <div class="priority-container">
-                <input type="radio" name="priority" id="priority-low" value="Low"><label for="priority-low">Low</label>
-                <input type="radio" name="priority" id="priority-normal" value="Normal" checked><label for="priority-normal">Normal</label>
-                <input type="radio" name="priority" id="priority-high" value="High"><label for="priority-high">High</label>
-            </div>
-            <div class="task-button-container">
-                <button id="create-task">Add</button>
-                <button id="close-popup-task">Close</button>
-            </div>
+    </div>
+    <div class="task-form">
+        <label for="task-name" class="task-name-label">Tasks name</label><input type="text" id="task-name">
+        <label for="task-date" class="task-date-label">task's due date</label><input type="date" id="task-date">
+        <div class="priority-container">
+            <input type="radio" name="priority" id="priority-low" value="Low"><label for="priority-low">Low</label>
+            <input type="radio" name="priority" id="priority-normal" value="Normal" checked><label for="priority-normal">Normal</label>
+            <input type="radio" name="priority" id="priority-high" value="High"><label for="priority-high">High</label>
+        </div>
+        <div class="task-button-container">
+            <button id="create-task">Add</button>
+            <button id="close-popup-task">Close</button>
         </div>
     </div>
 </body>
