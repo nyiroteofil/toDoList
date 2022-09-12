@@ -389,3 +389,56 @@ input[type="radio"]:checked + label {
         height: 70px;
     }
   }
+
+  @media only screen and (max-height: 600px) {
+    body {
+      display: flex;
+      flex-direction: column;
+
+      overflow: scroll;
+      -ms-overflow-style: none;
+        scrollbar-width: 0;
+    }
+
+    body::-webkit-scrollbar {
+        display: none;
+    }
+
+    .project {
+        min-height: 50px;
+    }
+
+    .project-items {
+        overflow: scroll;
+
+        flex-direction: column;
+
+        -ms-overflow-style: none;
+        scrollbar-width: 0;
+
+        height: 400px;
+    }
+
+    .tasks {
+        height: min(400px);
+        width: 95%;
+    }
+
+    .project-items::-webkit-scrollbar {
+        display: none;
+    }
+
+    .list-title {
+        color: white;
+    }
+
+    .task-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+
+        height: 70px;
+    }
+  }
