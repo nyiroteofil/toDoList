@@ -213,7 +213,7 @@ const addCreateButtonTarget = (obj, index) => {
     newButton.id = 'create-task';
     newButton.textContent = 'Add';
 
-    newButton.addEventListener('click', () => {createNewTask(obj, index); renderProjectTasks(obj), clearTaskForm(), changePopUp('task-form')});
+    newButton.addEventListener('click', () => {createNewTask(obj, index); renderProjectTasks(obj, index), clearTaskForm(), changePopUp('task-form')});
     
     parent.insertBefore(newButton, document.querySelector('#close-popup-task'));
 }
