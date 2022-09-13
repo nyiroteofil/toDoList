@@ -59,13 +59,17 @@ const produceProject = (index, obj) => {
     let projectArea = document.createElement('div');
     projectArea.classList.add('project');
     projectArea.addEventListener('click', () => {
-        renderProjectTasks(obj);
-        addCreateButtonTarget(obj);
+        renderProjectTasks(obj, index);
+        addCreateButtonTarget(obj, index);
     })
 
     let projectTitle = document.createElement('p');
     projectTitle.classList.add('project-title');
     projectTitle.textContent = projects[index].name;
+
+    let taskCounter = document.createElement('p');
+    taskCounter.classList.add('task-counter');
+    taskCounter.textContent = obj.tasks.length;
 
     let removeProjectBtn = document.createElement('button');
     removeProjectBtn.classList.add('remove-project');
@@ -86,15 +90,23 @@ const produceProject = (index, obj) => {
 
     parent.appendChild(projectArea);
     projectArea.appendChild(projectTitle);
+    projectArea.appendChild(taskCounter);
     projectArea.appendChild(removeProjectBtn);
     removeProjectBtn.appendChild(removeIcon);
 }
+
+const updateTaskCounter = (projecet, index) => {
+    let counter = document.querySelectorAll('.task-counter');
+    counter[index].textContent = projecet.tasks.length;
+
+    console.log('!!! counter updated !!!')
+};
 
 const clearProjectForm = () => {
     document.getElementById('project-name-input').value = '';
 }
 
-const createNewTask = (obj) => {
+const createNewTask = (obj, index) => {
     let name = document.querySelector('#task-name').value;
     let date = document.querySelector('#task-date').value;
     let priority;
@@ -107,11 +119,13 @@ const createNewTask = (obj) => {
 
     addTask(name, date, priority, obj);
 
+    updateTaskCounter(obj, index);
+
     /**Saves the array that stores the projects */
     localStorage.setItem("projects", JSON.stringify(projects));
 }
 
-const renderProjectTasks = (project) => {
+const renderProjectTasks = (project, index) => {
     console.log(projects);
 
     let listTitle = document.querySelector('.list-title')
@@ -136,6 +150,8 @@ const renderProjectTasks = (project) => {
 
         mark.addEventListener('click', () => {
             removeTask(project, project.tasks[i], taskContainer);
+            updateTaskCounter(project, index);
+
             localStorage.setItem("projects", JSON.stringify(projects));
         })
 
@@ -187,7 +203,7 @@ const renderAddTaskBtn = () => {
     document.querySelector('.tasks').appendChild(btn);
 }
 
-const addCreateButtonTarget = (obj) => {
+const addCreateButtonTarget = (obj, index) => {
     let button = document.querySelector('#create-task');
     let parent = document.querySelector('.task-button-container');
 
@@ -197,7 +213,7 @@ const addCreateButtonTarget = (obj) => {
     newButton.id = 'create-task';
     newButton.textContent = 'Add';
 
-    newButton.addEventListener('click', () => {createNewTask(obj); renderProjectTasks(obj), clearTaskForm(), changePopUp('task-form')});
+    newButton.addEventListener('click', () => {createNewTask(obj, index); renderProjectTasks(obj), clearTaskForm(), changePopUp('task-form')});
     
     parent.insertBefore(newButton, document.querySelector('#close-popup-task'));
 }

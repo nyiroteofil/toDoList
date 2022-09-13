@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rampart+One&display=swap');
 
 * {
     box-sizing: border-box;
@@ -27,11 +28,11 @@ body {
     padding: 30px;
 }
 
-.list-title {
+h1 {
     text-align: center;
-    font-size: 3em;
-
-    color:rgb(0, 0, 0)
+    font-size: 50px;
+    color: rgb(0, 0, 0);
+    font-family: 'rampart one'
 }
 
 .tasks {
@@ -82,12 +83,6 @@ body {
     
     height: 100%;
     width: 100%;
-}
-
-.sidebar-title {
-    text-align: center;
-    font-size: 50px;
-    color: white;
 }
 
 .projects {
@@ -151,6 +146,13 @@ body {
 
     position: absolute;
     bottom: calc(50% - 100px);
+
+    border: 2px black dashed;
+    border-radius: 10px;
+
+    box-shadow: 10px 5px 15px;
+
+    background-color: rgb(28, 247, 101);
 }
 
 textarea {
@@ -260,7 +262,7 @@ input[type="text"], input[type="date"] {
     align-items: left;
     gap: 15px;
 
-    position: relative;
+    position: absolute;
     left: calc(50% - 100px);
     bottom: 350px;
 
@@ -268,7 +270,12 @@ input[type="text"], input[type="date"] {
     height: 270px;
     padding: 10px;
 
-    background-color: aqua;
+    border: 2px black dashed;
+    border-radius: 10px;
+
+    box-shadow: 10px 5px 15px;
+
+    background-color: rgb(28, 247, 101);
 }
 
 input[type="radio"] {
@@ -337,6 +344,12 @@ input[type="radio"]:checked + label {
     font-family: 'Merriweather';
 }
 
+.task-counter {
+    color: rgb(211, 62, 16);
+    font-family: 'bebas neue';
+    font-size: 1.4em;
+}
+
 @media only screen and (max-width: 600px) {
     body {
       display: flex;
@@ -344,7 +357,7 @@ input[type="radio"]:checked + label {
 
       overflow: scroll;
       -ms-overflow-style: none;
-        scrollbar-width: 0;
+      scrollbar-width: 0;
     }
 
     body::-webkit-scrollbar {
@@ -356,7 +369,8 @@ input[type="radio"]:checked + label {
     }
 
     .project-items {
-        overflow: scroll;
+        overflow-y: scroll;
+        overflow-x: visible;
 
         flex-direction: column;
 
@@ -369,14 +383,16 @@ input[type="radio"]:checked + label {
     .tasks {
         height: min(400px);
         width: 95%;
+
+        margin-bottom: 20px;
+    }
+
+    .task-form.show {
+        bottom: -450px
     }
 
     .project-items::-webkit-scrollbar {
         display: none;
-    }
-
-    .list-title {
-        color: white;
     }
 
     .task-container {
@@ -387,6 +403,7 @@ input[type="radio"]:checked + label {
         gap: 10px;
 
         height: 70px;
+        width: max(100%);
     }
   }
 
@@ -409,7 +426,8 @@ input[type="radio"]:checked + label {
     }
 
     .project-items {
-        overflow: scroll;
+        overflow-y: scroll;
+        overflow-x: visible;
 
         flex-direction: column;
 
@@ -422,15 +440,18 @@ input[type="radio"]:checked + label {
     .tasks {
         height: min(400px);
         width: 95%;
+
+        margin-bottom: 120px;
     }
 
     .project-items::-webkit-scrollbar {
         display: none;
     }
 
-    .list-title {
-        color: white;
+    .task-form.show {
+        bottom: -450px
     }
+
 
     .task-container {
         display: flex;
@@ -440,5 +461,6 @@ input[type="radio"]:checked + label {
         gap: 10px;
 
         height: 70px;
+        width: max(100%);
     }
   }
