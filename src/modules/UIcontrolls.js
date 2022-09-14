@@ -61,15 +61,12 @@ const produceProject = (index, obj) => {
     projectArea.addEventListener('click', () => {
         renderProjectTasks(obj, index);
         addCreateButtonTarget(obj, index);
+        console.log(index);
     })
 
     let projectTitle = document.createElement('p');
     projectTitle.classList.add('project-title');
     projectTitle.textContent = projects[index].name;
-
-    let taskCounter = document.createElement('p');
-    taskCounter.classList.add('task-counter');
-    taskCounter.textContent = obj.tasks.length;
 
     let removeProjectBtn = document.createElement('button');
     removeProjectBtn.classList.add('remove-project');
@@ -90,23 +87,15 @@ const produceProject = (index, obj) => {
 
     parent.appendChild(projectArea);
     projectArea.appendChild(projectTitle);
-    projectArea.appendChild(taskCounter);
     projectArea.appendChild(removeProjectBtn);
     removeProjectBtn.appendChild(removeIcon);
 }
-
-const updateTaskCounter = (projecet, index) => {
-    let counter = document.querySelectorAll('.task-counter');
-    counter[index].textContent = projecet.tasks.length;
-
-    console.log('!!! counter updated !!!')
-};
 
 const clearProjectForm = () => {
     document.getElementById('project-name-input').value = '';
 }
 
-const createNewTask = (obj, index) => {
+const createNewTask = (obj, index, node) => {
     let name = document.querySelector('#task-name').value;
     let date = document.querySelector('#task-date').value;
     let priority;
@@ -119,14 +108,11 @@ const createNewTask = (obj, index) => {
 
     addTask(name, date, priority, obj);
 
-    updateTaskCounter(obj, index);
-
     /**Saves the array that stores the projects */
     localStorage.setItem("projects", JSON.stringify(projects));
 }
 
-const renderProjectTasks = (project, index) => {
-    console.log(projects);
+const renderProjectTasks = (project) => {
 
     let listTitle = document.querySelector('.list-title')
     listTitle.textContent = project.name;
@@ -150,7 +136,6 @@ const renderProjectTasks = (project, index) => {
 
         mark.addEventListener('click', () => {
             removeTask(project, project.tasks[i], taskContainer);
-            updateTaskCounter(project, index);
 
             localStorage.setItem("projects", JSON.stringify(projects));
         })
@@ -213,7 +198,7 @@ const addCreateButtonTarget = (obj, index) => {
     newButton.id = 'create-task';
     newButton.textContent = 'Add';
 
-    newButton.addEventListener('click', () => {createNewTask(obj, index); renderProjectTasks(obj, index), clearTaskForm(), changePopUp('task-form')});
+    newButton.addEventListener('click', () => {createNewTask(obj, index); renderProjectTasks(obj, index); clearTaskForm(); changePopUp('task-form')});
     
     parent.insertBefore(newButton, document.querySelector('#close-popup-task'));
 }
@@ -226,7 +211,86 @@ const clearTaskForm = () => {
     name.value = '';
     date.value = '';
     radios[1].checked = true;
+};
+
+const getTodaysTasks = () => {
+    removeAllChild('tasks')
+
+    for (let i1 = 0; i1 < projects.length; i1++) {
+        for (let i2 = 0; i2 < projects[i1].tasks.length; i2++) {
+            if (projects[i1].tasks[i2].date === format(new Date(), 'yyyy-MM-dd')) {
+                renderPreferedTask(projects[i1], i2);
+            } 
+        };
+    };
+};
+
+const getHighTasks = () => {
+    removeAllChild('tasks');
+
+    for (let i1 = 0; i1 < projects.length; i1++) {
+        for (let i2 = 0; i2 < projects[i1].tasks.length; i2++) {
+            if (projects[i1].tasks[i2].priority === 'High') {
+                console.log(projects[i1].tasks[i2].priority);
+                renderPreferedTask(projects[i1], i2);
+            } 
+        };
+    };
 }
+
+const renderPreferedTask = (project, task) => {
+
+        let parent = document.querySelector('.tasks')
+
+        let taskContainer = document.createElement('div');
+        taskContainer.classList.add('task-container');
+
+        let markerContainer = document.createElement('div');
+        markerContainer.classList.add('marker-container');
+        let mark = document.createElement('img');
+        mark.classList.add('mark');
+        mark.src = checkMark;
+
+        mark.addEventListener('click', () => {
+            removeTask(project, project.tasks[task], taskContainer);
+
+            localStorage.setItem("projects", JSON.stringify(projects));
+        })
+
+        let taskName = document.createElement('p')
+        taskName.classList.add('task-name');
+        taskName.textContent = project.tasks[task].name;
+
+        let dueTime = document.createElement('p');
+        dueTime.classList.add('due-time');
+        
+        if (project.tasks[task].date === '') {
+            dueTime.textContent = 'No time constraint'
+        } else {
+            dueTime.textContent = format(parseISO(project.tasks[task].date), 'dd/MM/yyyy');
+        }
+
+        switch (project.tasks[task].priority) {
+            case 'Low': 
+                taskContainer.classList.add('low');
+                break;
+            case 'Normal':
+                taskContainer.classList.add('normal');
+                break;
+            case 'High':
+                taskContainer.classList.add('high');
+                break;
+        
+            default:
+                taskContainer.classList.add('normal')
+        }
+
+        parent.appendChild(taskContainer);
+        taskContainer.appendChild(markerContainer);
+        taskContainer.appendChild(taskName);
+        markerContainer.appendChild(mark);
+        taskContainer.appendChild(dueTime);
+};
 
 export {
     changePopUp,
@@ -234,5 +298,7 @@ export {
     renderProjects,
     removeAllChild,
     clearProjectForm,
+    getTodaysTasks,
+    getHighTasks,
 };
 

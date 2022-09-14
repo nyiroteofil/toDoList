@@ -1,3 +1,7 @@
 .project:hover {
     scale: 1.05;
 }
+
+#today-btn:focus, #high-prior:focus {
+    scale: 1.1;
+}

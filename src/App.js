@@ -7,11 +7,14 @@ import {
     changePopUp,
     renderProjects,
     clearProjectForm,
+    getTodaysTasks,
+    getHighTasks,
 } from './modules/UIcontrolls.js'
 
 import {
     createProjectObj,
 } from './modules/projects.js'
+import { format } from 'date-fns';
 
 let projects = [];
 
@@ -38,6 +41,8 @@ document.querySelector('#create-project').addEventListener('click', () => {
         localStorage.setItem("projects", JSON.stringify(projects));
     }
 });
+document.querySelector('#today-btn').addEventListener('click', getTodaysTasks);
+document.querySelector('#high-prior').addEventListener('click', getHighTasks);
 
 export {
     projects
