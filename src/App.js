@@ -2,6 +2,8 @@ import './style.css';
 import './effects.css';
 import _ from 'lodash';
 import 'date-fns';
+import todayLogo from './images/today.svg';
+import priorityLogo from './images/important.svg';
 
 import {
     changePopUp,
@@ -25,6 +27,9 @@ if (json) {
         console.log(projects);
         renderProjects(projects);
 }
+
+document.querySelector('#today-btn-logo').src = todayLogo;
+document.querySelector('#priority-btn-logo').src = priorityLogo;
 
 document.getElementById('close-popup').addEventListener('click', () => {changePopUp('project-form')});
 document.querySelector('#close-popup-task').addEventListener('click', () => {changePopUp('task-form')});
